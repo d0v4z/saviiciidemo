@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<base href="../">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Book a fitting | SAVIICII</title>
+<meta name="description" content="Book a SAVIICII fitting: starlight headliner, ambient lighting, door projectors, lit sills, LED headlights or custom kits. Pick your car, a day and a time.">
+<meta name="theme-color" content="#050507">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Reem+Kufi:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/sv.css?v=2">
+<style>
+body{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+.top{position:relative;padding:150px 0 50px;overflow:hidden;isolation:isolate;border-bottom:1px solid var(--line)}
+.top canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.top::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(70% 90% at 50% 120%,rgba(var(--amb-rgb),.35),transparent 70%)}
+.top .h2{margin:16px 0 14px}
+.blk{padding:54px 0 10px}
+.bh{display:flex;align-items:baseline;gap:16px;margin-bottom:22px}
+.bh b{font-family:var(--logo);font-weight:400;font-size:14px;letter-spacing:.3em;color:#fff;text-shadow:0 0 12px rgba(var(--amb-rgb),.9)}
+.bh h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,5vw,44px);line-height:1.1}
+[dir=rtl] .bh h2{line-height:1.4}
+.bh small{margin-inline-start:auto;color:var(--mute);font-size:13px}
+
+/* services */
+.svcs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (min-width:900px){.svcs{grid-template-columns:repeat(3,1fr);gap:14px}}
+.sv{position:relative;aspect-ratio:1/1.05;overflow:hidden;border:1px solid var(--line);text-align:start;isolation:isolate;transition:border-color .4s,box-shadow .5s,transform .3s}
+@media (min-width:900px){.sv{aspect-ratio:16/11}}
+.sv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:brightness(.5) saturate(.8);transform:scale(1.06);transition:filter .6s,transform 1.2s var(--ease)}
+.sv::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 30%,rgba(5,5,7,.92))}
+.sv span{position:absolute;inset-inline:14px;bottom:12px;font-family:var(--serif);font-size:clamp(20px,2.4vw,26px);line-height:1.15}
+[dir=rtl] .sv span{font-size:18px;line-height:1.4}
+.sv i{position:absolute;top:10px;inset-inline-end:10px;width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.5);display:grid;place-items:center;font-style:normal;font-size:14px;color:transparent;transition:all .4s var(--ease)}
+.sv.on{border-color:rgba(var(--amb-rgb),1);box-shadow:0 0 0 1px rgba(var(--amb-rgb),1),0 0 40px -6px rgba(var(--amb-rgb),.8)}
+.sv.on img{filter:brightness(.95) saturate(1.1);transform:scale(1)}
+.sv.on i{background:#fff;border-color:#fff;color:#050507;box-shadow:0 0 16px rgba(var(--amb-rgb),1)}
+.sv:active{transform:scale(.98)}
+
+/* chips + inputs */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{height:44px;padding:0 16px;border:1px solid var(--line);font-size:14px;transition:all .35s var(--ease)}
+.chip.on{border-color:#fff;background:#fff;color:#050507;box-shadow:0 0 24px rgba(var(--amb-rgb),.6)}
+.row2{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;margin-top:12px}
+.fld{display:block}
+.fld span{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+[dir=rtl] .fld span{letter-spacing:0;font-size:13px}
+.inp{width:100%;height:54px;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.25);padding:0 2px;font-size:17px;outline:none;border-radius:0;transition:border-color .4s,box-shadow .4s}
+textarea.inp{height:auto;min-height:80px;padding-top:14px;resize:vertical}
+.inp:focus{border-color:rgba(var(--amb-rgb),1);box-shadow:0 1px 0 0 rgba(var(--amb-rgb),1),0 10px 20px -16px rgba(var(--amb-rgb),1)}
+.inp::placeholder{color:rgba(242,241,246,.3)}
+.grid2{display:grid;gap:18px}
+@media (min-width:760px){.grid2{grid-template-columns:1fr 1fr}}
+
+/* dates + times */
+.days{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:4px 20px 10px;margin:0 -20px;scroll-snap-type:x proximity}
+.days::-webkit-scrollbar{display:none}
+.day{flex:none;width:72px;height:92px;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;scroll-snap-align:start;transition:all .35s var(--ease)}
+.day small{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+[dir=rtl] .day small{letter-spacing:0}
+.day b{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1}
+.day.off{opacity:.3;pointer-events:none}
+.day.on{background:#fff;color:#050507;border-color:#fff;box-shadow:0 0 30px rgba(var(--amb-rgb),.6)}
+.day.on small{color:#050507}
+.times{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+@media (min-width:760px){.times{grid-template-columns:repeat(5,1fr)}}
+.time{height:50px;border:1px solid var(--line);font-size:15px;direction:ltr;transition:all .35s var(--ease)}
+.time.taken{opacity:.25;text-decoration:line-through;pointer-events:none}
+.time.on{background:#fff;color:#050507;border-color:#fff;box-shadow:0 0 24px rgba(var(--amb-rgb),.6)}
+.hint{color:var(--mute);font-size:14px;margin-top:12px}
+
+/* sticky summary */
+.bar{position:fixed;z-index:70;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(5,5,7,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+.bar::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--amb-rgb),1),transparent);box-shadow:0 0 14px rgba(var(--amb-rgb),.9)}
+.bar .wrap{display:flex;align-items:center;gap:14px}
+.bar .s{flex:1;min-width:0;font-size:13px;line-height:1.45;color:var(--mute)}
+.bar .s b{display:block;color:var(--ink);font-weight:400;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .btn{flex:none}
+.err{color:#ff7a8a;font-size:14px;margin-top:14px;min-height:20px}
+
+/* confirmation */
+.done{position:fixed;inset:0;z-index:150;background:rgba(5,5,7,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:grid;place-items:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .6s;overflow:auto}
+.done.on{opacity:1;pointer-events:auto}
+.done .box{width:min(520px,100%);text-align:center}
+.ring{width:120px;height:120px;margin:0 auto 22px}
+.ring circle{fill:none;stroke:rgba(var(--amb-rgb),1);stroke-width:2;stroke-dasharray:340;stroke-dashoffset:340;filter:drop-shadow(0 0 8px rgba(var(--amb-rgb),1))}
+.ring path{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60}
+.done.on .ring circle{animation:draw 1.2s .2s var(--ease) forwards}
+.done.on .ring path{animation:draw .6s 1.1s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.done h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,8vw,64px);line-height:1.1}
+.done .ref{font-family:var(--logo);letter-spacing:.3em;margin:8px 0 22px;color:var(--mute);direction:ltr}
+.done ul{list-style:none;text-align:start;border:1px solid var(--line);padding:6px 18px;margin-bottom:20px}
+.done li{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.done li:last-child{border:0}
+.done li span{color:var(--mute)}
+.done li b{font-weight:400;text-align:end}
+.done .acts{display:grid;gap:10px}
+.done .demo{color:var(--mute);font-size:12px;margin-top:16px}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="./" class="wm chrome">SAVIICII</a>
+  <div class="links"><a href="./#services" data-i="nServices">Services</a><a href="./#work" data-i="nWork">The work</a></div>
+  <div class="r"><button class="lang" id="lang">عربي</button><a class="btn sm" data-wa href="#" target="_blank" rel="noopener" data-i="wa">WhatsApp</a></div>
+</nav>
+
+<header class="top">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="eyebrow" data-i="bK">Book a fitting</div>
+    <h1 class="h2 split" data-i="bH">Reserve your <em>slot.</em></h1>
+    <p class="lead rv" data-i="bP"></p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="blk"><div class="bh"><b>01</b><h2 data-i="s1t">What are we doing?</h2><small data-i="many">Pick one or more</small></div><div class="svcs" id="svcs"></div></section>
+  <section class="blk"><div class="bh"><b>02</b><h2 data-i="s2t">Your car</h2></div>
+    <div class="chips" id="makes"></div>
+    <div class="row2"><label class="fld"><span data-i="model">Model</span><input class="inp" id="model" autocomplete="off" placeholder="C200, X5, Range Rover Sport…"></label><label class="fld"><span data-i="year">Year</span><input class="inp" id="year" inputmode="numeric" maxlength="4" placeholder="2022"></label></div>
+  </section>
+  <section class="blk"><div class="bh"><b>03</b><h2 data-i="s3t">Pick a day & time</h2></div>
+    <div class="days" id="days"></div>
+    <div class="times" id="times"></div>
+    <p class="hint" data-i="sunday">Closed on Sundays. Most fittings take 2 to 5 hours.</p>
+  </section>
+  <section class="blk"><div class="bh"><b>04</b><h2 data-i="s4t">Your details</h2></div>
+    <div class="grid2">
+      <label class="fld"><span data-i="name">Name</span><input class="inp" id="nm" autocomplete="name"></label>
+      <label class="fld"><span data-i="phone">Phone</span><input class="inp" id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="70 123 456"></label>
+    </div>
+    <div style="margin-top:22px"><span class="fld"><span data-i="colour">Favourite colour</span></span><div class="dots" id="dots" style="margin-top:10px"></div></div>
+    <label class="fld" style="margin-top:22px"><span data-i="notes">Notes</span><textarea class="inp" id="nt" rows="2" data-ph="notesPh"></textarea></label>
+    <p class="err" id="err"></p>
+  </section>
+</main>
+
+<div class="bar"><div class="wrap"><div class="s" id="sum"></div><button class="btn fill" id="go" data-i="confirm">Confirm</button></div></div>
+
+<div class="done" id="done" role="dialog" aria-modal="true"><div class="box">
+  <svg class="ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54"/><path d="M40 62 l14 14 l28 -30"/></svg>
+  <h2 data-i="okH">You're booked.</h2><div class="ref" id="ref"></div>
+  <ul id="dl"></ul>
+  <div class="acts"><a class="btn fill" id="sendWa" href="#" target="_blank" rel="noopener" data-i="sendWa">Send on WhatsApp</a><button class="btn" id="ics" data-i="addCal">Add to calendar</button><a class="btn" href="./" data-i="home">Back home</a></div>
+  <p class="demo" data-i="demo"></p>
+</div></div>
+
+<script src="assets/sv.js?v=2"></script>
+<script>
+(() => {
+  const $ = s => document.querySelector(s), SV = window.SV;
+  Object.assign(SV.extra.en, {
+    bK: 'Book a fitting', bH: 'Reserve your <em>slot.</em>', bP: 'Pick what you want, your car and a time. We confirm on WhatsApp with the price before anything starts.',
+    s1t: 'What are we doing?', many: 'Pick one or more', s2t: 'Your car', model: 'Model', year: 'Year', s3t: 'Pick a day & time', sunday: 'Closed on Sundays. Most fittings take 2 to 5 hours.',
+    s4t: 'Your details', name: 'Name', phone: 'Phone', colour: 'Favourite colour', notes: 'Notes', notesPh: 'Logo for the projectors, colour ideas, anything…',
+    confirm: 'Confirm', okH: "You're booked.", sendWa: 'Send on WhatsApp', addCal: 'Add to calendar', home: 'Back home', demo: 'This is a demo: nothing was sent. On the real site the booking goes straight to SAVIICII.',
+    nothing: 'Nothing picked yet', svcN: n => n + (n === 1 ? ' service' : ' services'), noDate: 'pick a day & time', other: 'Other',
+    eSvc: 'Pick at least one service.', eCar: 'Choose your car make.', eDate: 'Pick a day and a time.', eName: 'Write your name.', ePhone: 'Write a valid phone number.',
+    lSvc: 'Services', lCar: 'Car', lWhen: 'When', lName: 'Name', lCol: 'Colour',
+    sv: { starlight: 'Starlight headliner', ambient: 'Ambient lighting', projector: 'Door projectors', sills: 'Illuminated sills', headlights: 'LED headlights', kits: 'Custom kit / accessories' }
+  });
+  Object.assign(SV.extra.ar, {
+    bK: 'احجز موعد', bH: 'احجز <em>موعدك.</em>', bP: 'نقّي شو بدّك، سيارتك ووقت يناسبك. منأكّدلك عالواتساب مع السعر قبل ما نبلّش.',
+    s1t: 'شو بدّك نعمل؟', many: 'فيك تنقّي أكتر من وحدة', s2t: 'سيارتك', model: 'الموديل', year: 'السنة', s3t: 'نقّي نهار ووقت', sunday: 'مسكّرين نهار الأحد. معظم الشغلات بتاخد من ساعتين لـ5 ساعات.',
+    s4t: 'معلوماتك', name: 'الاسم', phone: 'رقم التلفون', colour: 'لونك المفضّل', notes: 'ملاحظات', notesPh: 'اللوغو للبروجكتور، أفكار ألوان، أي شي…',
+    confirm: 'أكّد', okH: 'تمّ الحجز.', sendWa: 'ابعت عالواتساب', addCal: 'زيد عالروزنامة', home: 'رجوع للرئيسية', demo: 'هيدا تجريبي: ما انبعت شي. عالموقع الحقيقي الحجز بيوصل لـ SAVIICII مباشرة.',
+    nothing: 'ما نقّيت شي بعد', svcN: n => n + (n === 1 ? ' خدمة' : ' خدمات'), noDate: 'نقّي نهار ووقت', other: 'غير',
+    eSvc: 'نقّي خدمة وحدة عالأقل.', eCar: 'نقّي ماركة سيارتك.', eDate: 'نقّي نهار ووقت.', eName: 'اكتب اسمك.', ePhone: 'اكتب رقم تلفون صحيح.',
+    lSvc: 'الخدمات', lCar: 'السيارة', lWhen: 'الموعد', lName: 'الاسم', lCol: 'اللون',
+    sv: { starlight: 'سقف نجوم', ambient: 'إضاءة أمبيانت', projector: 'بروجكتور للأبواب', sills: 'عتبات مضوّية', headlights: 'أضواء LED', kits: 'كيت مخصّص / إكسسوارات' }
+  });
+  const SVCS = [['starlight', 'starlight-maybach.jpg'], ['ambient', 'ambient-rainbow.jpg'], ['projector', 'projector-amg.jpg'], ['sills', 'sill-maybach.jpg'], ['headlights', 'headlights.jpg'], ['kits', 'door-orchid.jpg']];
+  const MAKES = ['Mercedes-Benz', 'BMW', 'Range Rover', 'Porsche', 'Audi', 'Lexus', 'Toyota', 'Nissan', 'Kia', 'Hyundai', 'other'];
+  const S = { svc: new Set(), make: '', day: null, time: '' };
+  const pad = n => String(n).padStart(2, '0');
+  const days = []; { const d0 = new Date(); d0.setHours(0, 0, 0, 0); for (let i = 1; i <= 21; i++) { const d = new Date(d0); d.setDate(d0.getDate() + i); days.push(d); } }
+  const TIMES = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+  const taken = (d, t) => ((d.getDate() * 7 + d.getMonth() * 3 + parseInt(t)) % 5) === 0;
+  const loc = () => SV.lang() === 'ar' ? 'ar-LB-u-nu-latn' : 'en-GB';
+  const fmtDay = d => d.toLocaleDateString(loc(), { weekday: 'long', day: 'numeric', month: 'long' });
+
+  function render() {
+    const t = SV.t;
+    $('#svcs').innerHTML = SVCS.map(([k, img]) => `<button class="sv${S.svc.has(k) ? ' on' : ''}" data-s="${k}" aria-pressed="${S.svc.has(k)}"><img src="assets/img/${img}" alt="" loading="lazy"><i>✓</i><span>${t('sv')[k]}</span></button>`).join('');
+    $('#makes').innerHTML = MAKES.map(m => `<button class="chip${S.make === m ? ' on' : ''}" data-m="${m}">${m === 'other' ? t('other') : m}</button>`).join('');
+    $('#days').innerHTML = days.map((d, i) => `<button class="day${d.getDay() === 0 ? ' off' : ''}${S.day === i ? ' on' : ''}" data-d="${i}"><small>${d.toLocaleDateString(loc(), { weekday: 'short' })}</small><b>${d.getDate()}</b><small>${d.toLocaleDateString(loc(), { month: 'short' })}</small></button>`).join('');
+    times();
+    $('#nt').placeholder = t('notesPh');
+    sum();
+  }
+  function times() {
+    const d = S.day != null ? days[S.day] : null;
+    $('#times').innerHTML = TIMES.map(x => `<button class="time${d && taken(d, x) ? ' taken' : ''}${S.time === x ? ' on' : ''}" data-t="${x}"${!d ? ' disabled style="opacity:.35"' : ''}>${x}</button>`).join('');
+  }
+  function sum() {
+    const t = SV.t, n = S.svc.size;
+    $('#sum').innerHTML = `<b>${n ? [...S.svc].map(k => t('sv')[k]).join(' · ') : t('nothing')}</b>${S.day != null && S.time ? fmtDay(days[S.day]) + ' · ' + S.time : t('noDate')}`;
+  }
+  SV.onLang(render);
+
+  document.addEventListener('click', e => {
+    const s = e.target.closest('.sv'); if (s) { const k = s.dataset.s; S.svc.has(k) ? S.svc.delete(k) : S.svc.add(k); s.classList.toggle('on'); s.setAttribute('aria-pressed', S.svc.has(k)); sum(); return; }
+    const m = e.target.closest('.chip'); if (m) { S.make = m.dataset.m; document.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c === m)); return; }
+    const d = e.target.closest('.day'); if (d) { S.day = +d.dataset.d; if (S.time && taken(days[S.day], S.time)) S.time = ''; document.querySelectorAll('.day').forEach(c => c.classList.toggle('on', c === d)); times(); sum(); return; }
+    const tm = e.target.closest('.time'); if (tm) { S.time = tm.dataset.t; document.querySelectorAll('.time').forEach(c => c.classList.toggle('on', c === tm)); sum(); }
+  });
+
+  /* favourite colour = the page's ambience */
+  $('#dots').innerHTML = SV.AMB.map(([k, c], i) => `<button role="radio" aria-label="${k}" style="--c:${c}" data-a="${i}"></button>`).join('');
+  SV.onAmb(i => document.querySelectorAll('#dots button').forEach((b, k) => b.classList.toggle('on', k === i)));
+  $('#dots').addEventListener('click', e => { const b = e.target.closest('button'); if (b) SV.setAmb(+b.dataset.a, true); });
+  SV.setAmb(SV.ambI);
+  SV.apply(SV.lang());
+  SV.sky($('#sky'), { density: 3000 });
+  requestAnimationFrame(() => document.querySelector('.top .split').classList.add('in'));
+
+  /* confirm */
+  $('#go').addEventListener('click', () => {
+    const t = SV.t, name = $('#nm').value.trim(), phone = $('#ph').value.replace(/\D/g, '');
+    const err = !S.svc.size ? 'eSvc' : !S.make ? 'eCar' : (S.day == null || !S.time) ? 'eDate' : !name ? 'eName' : phone.length < 7 ? 'ePhone' : '';
+    if (err) { $('#err').textContent = t(err); const tgt = { eSvc: '#svcs', eCar: '#makes', eDate: '#days', eName: '#nm', ePhone: '#ph' }[err]; document.querySelector(tgt).scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    $('#err').textContent = '';
+    const ref = 'SV-' + Math.floor(1000 + Math.random() * 9000), car = [S.make === 'other' ? t('other') : S.make, $('#model').value.trim(), $('#year').value.trim()].filter(Boolean).join(' ');
+    const when = fmtDay(days[S.day]) + ' · ' + S.time, svcs = [...S.svc].map(k => t('sv')[k]).join(', '), col = SV.t('amb')[SV.AMB[SV.ambI][0]];
+    const rows = [[t('lSvc'), svcs], [t('lCar'), car], [t('lWhen'), when], [t('lName'), name], [t('lCol'), col]];
+    $('#ref').textContent = ref;
+    $('#dl').innerHTML = rows.map(([a, b]) => `<li><span>${a}</span><b></b></li>`).join('');
+    [...$('#dl').children].forEach((li, i) => li.querySelector('b').textContent = rows[i][1]);
+    const msg = (SV.lang() === 'ar' ? `مرحبا SAVIICII، حجز ${ref}\n` : `Hello SAVIICII, booking ${ref}\n`) + rows.map(([a, b]) => `${a}: ${b}`).join('\n') + ($('#nt').value.trim() ? `\n${t('notes')}: ${$('#nt').value.trim()}` : '');
+    $('#sendWa').href = SV.wa(msg);
+    try { const all = JSON.parse(localStorage.getItem('sv-bookings') || '[]'); all.unshift({ ref, svc: [...S.svc], car, day: days[S.day].toISOString(), time: S.time, name, phone, notes: $('#nt').value.trim(), colour: SV.AMB[SV.ambI][0], at: Date.now() }); localStorage.setItem('sv-bookings', JSON.stringify(all.slice(0, 50))); } catch (e) {}
+    const d = days[S.day], [hh] = S.time.split(':').map(Number), st = `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(hh)}0000`, en = `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(Math.min(23, hh + 3))}0000`;
+    $('#ics').onclick = () => {
+      const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//SAVIICII//Booking//EN', 'BEGIN:VEVENT', 'UID:' + ref + '@saviicii', 'DTSTART:' + st, 'DTEND:' + en, 'SUMMARY:SAVIICII fitting (' + svcs + ')', 'DESCRIPTION:' + ref + ' · ' + car + ' · +961 79 029 518', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })); a.download = ref + '.ics'; a.click();
+    };
+    $('#done').classList.add('on'); if (navigator.vibrate) navigator.vibrate([20, 60, 20]);
+  });
+  $('#done').addEventListener('click', e => { if (e.target.id === 'done') $('#done').classList.remove('on'); });
+})();
+</script>
+</body>
+</html>
